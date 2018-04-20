@@ -1,10 +1,10 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="file://D:/CSED/2nd Year/2nd Semester/DS 2/jgrapht-1.1.0/jgrapht-1.1.0/lib" />
+      <root url="file://$PROJECT_DIR$/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://D:/CSED/2nd Year/2nd Semester/DS 2/jgrapht-1.1.0/jgrapht-1.1.0/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
   </library>
 </component>
