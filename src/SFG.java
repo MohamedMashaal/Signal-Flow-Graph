@@ -21,7 +21,7 @@ public class SFG {
     public SFG(ArrayList<String> vertices, ArrayList<DirectedEdgeData> edges) {
         this.inputNode = vertices.get(0);
         this.outputNode = vertices.get(vertices.size()-1);
-        this.graph = new DirectedWeightedMultigraph<>(DefaultWeightedEdge.class);
+        this.graph = new DirectedWeightedPseudograph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
         for(String vertex : vertices){
             graph.addVertex(vertex);
         }
