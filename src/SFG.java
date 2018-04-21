@@ -16,6 +16,7 @@ public class SFG {
     private ArrayList<ArrayList<ArrayList<VerticesAndGain>>> allNonTouchingLoops;
     private Double delta;
     private ArrayList<Double> allDeltasOfForwardPaths;
+    private Double totalTransferFunction;
 
     public SFG(ArrayList<String> vertices, ArrayList<DirectedEdgeData> edges) {
         this.inputNode = vertices.get(0);
@@ -189,6 +190,24 @@ public class SFG {
         }
 
         return allDeltasOfForwardPaths;
+    }
+
+    public double getTotalTransferFunction(){
+        if(totalTransferFunction != null){
+            return totalTransferFunction;
+        }
+
+        double sumOfProducts = 0;
+        int i=0;
+
+        for(VerticesAndGain forwardPath : allForwardPaths){
+            sumOfProducts += forwardPath.getGain() * allDeltasOfForwardPaths.get(i);
+            i++;
+        }
+
+        totalTransferFunction = sumOfProducts / delta;
+
+        return totalTransferFunction;
     }
 
     private boolean isNonTouchingWithForwardPath(VerticesAndGain forwardPath, VerticesAndGain loop){
