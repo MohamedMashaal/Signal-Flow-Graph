@@ -23,5 +23,7 @@ public class Test {
         System.out.println("forward paths: " + sfg.getAllForwardPaths());
 
         System.out.println("individual loops: " + sfg.getAllIndividualLoops());
+
+        System.out.println("n non touching loops: " + sfg.getAllNonTouchingLoops());
     }
 }

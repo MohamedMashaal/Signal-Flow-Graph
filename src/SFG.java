@@ -77,9 +77,43 @@ public class SFG {
 
     }
 
-    public ArrayList<ArrayList<Pair<VerticesAndGain, VerticesAndGain>>> getAllNonTouchingLoops(){
-        // TODO !!
-        return null;
+    public ArrayList<ArrayList<ArrayList<VerticesAndGain>>> getAllNonTouchingLoops(){
+        ArrayList<VerticesAndGain> individualLoops = getAllIndividualLoops();
+        ArrayList<ArrayList<ArrayList<VerticesAndGain>>> allNonTouchingLoops = new ArrayList<>();
+        boolean stop = false;
+        for(int n=2; !stop; n++){
+            ArrayList<ArrayList<VerticesAndGain>> nCombinations = AlgoUtils.getAllCombinations(individualLoops, n);
+            ArrayList<ArrayList<VerticesAndGain>> nNonTouchingLoops = new ArrayList<>();
+
+            for(ArrayList<VerticesAndGain> combination : nCombinations){
+                if(isNonTouching(combination)){
+                    nNonTouchingLoops.add(combination);
+                }
+            }
+
+            if(nNonTouchingLoops.isEmpty()){
+                stop = true;
+                continue;
+            }
+
+            allNonTouchingLoops.add(nNonTouchingLoops);
+
+        }
+        return allNonTouchingLoops;
+    }
+
+    private boolean isNonTouching(ArrayList<VerticesAndGain> combination){
+        for(int i=0; i<combination.size(); i++){
+            for(int j=0; j<combination.get(i).getVertices().size(); j++){
+                String vertex = combination.get(i).getVertices().get(j);
+                for(int k=i+1; k<combination.size(); k++){
+                    if(combination.get(k).getVertices().contains(vertex)){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     private double getGain(List<String> cycle) {
