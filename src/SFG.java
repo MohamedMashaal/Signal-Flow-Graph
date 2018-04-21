@@ -1,16 +1,11 @@
-import javafx.util.Pair;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
-import org.jgrapht.alg.CycleDetector;
-import org.jgrapht.alg.cycle.JohnsonSimpleCycles;
 import org.jgrapht.alg.cycle.TarjanSimpleCycles;
 import org.jgrapht.alg.shortestpath.AllDirectedPaths;
 import org.jgrapht.graph.*;
-import org.jgrapht.traverse.DepthFirstIterator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class SFG {
     private Graph<String, DefaultWeightedEdge> graph;
@@ -20,6 +15,7 @@ public class SFG {
     private ArrayList<VerticesAndGain> allIndividualLoops;
     private ArrayList<ArrayList<ArrayList<VerticesAndGain>>> allNonTouchingLoops;
     private Double delta;
+    private ArrayList<Double> allDeltasOfForwardPaths;
 
     public SFG(ArrayList<String> vertices, ArrayList<DirectedEdgeData> edges) {
         this.inputNode = vertices.get(0);
@@ -105,7 +101,7 @@ public class SFG {
             ArrayList<ArrayList<VerticesAndGain>> nNonTouchingLoops = new ArrayList<>();
 
             for(ArrayList<VerticesAndGain> combination : nCombinations){
-                if(isNonTouching(combination)){
+                if(isNonTouchingLoops(combination)){
                     nNonTouchingLoops.add(combination);
                 }
             }
@@ -155,7 +151,68 @@ public class SFG {
         return this.delta;
     }
 
-    private boolean isNonTouching(ArrayList<VerticesAndGain> combination){
+    public ArrayList<Double> getAllDeltasOfForwardPaths(){
+        if(allDeltasOfForwardPaths != null){
+            return allDeltasOfForwardPaths;
+        }
+
+        allDeltasOfForwardPaths = new ArrayList<>();
+
+        for(VerticesAndGain forwardPath : allForwardPaths){
+            double sumOfIndividualLoopGains = 0;
+            for(VerticesAndGain loop : allIndividualLoops){
+                if(isNonTouchingWithForwardPath(forwardPath, loop)) {
+                    sumOfIndividualLoopGains += loop.getGain();
+                }
+            }
+
+            int sign = 1;
+            double resultOfAllNonTouchingLoops = 0;
+
+            for(ArrayList<ArrayList<VerticesAndGain>> nNonTouchingLoops : allNonTouchingLoops){
+                double sumOfGainProductsOfNNonTouchingLoops = 0;
+                for(ArrayList<VerticesAndGain> combination : nNonTouchingLoops){
+                    if(isNonTouchingWithForwardPath(forwardPath, combination)) {
+                        double gainProductOfCombination = 1;
+                        for (VerticesAndGain loop : combination) {
+                            gainProductOfCombination *= loop.getGain();
+                        }
+                        sumOfGainProductsOfNNonTouchingLoops += gainProductOfCombination;
+                    }
+                }
+                resultOfAllNonTouchingLoops += sign * sumOfGainProductsOfNNonTouchingLoops;
+                sign *= -1;
+            }
+
+            double deltaI = 1 - sumOfIndividualLoopGains + resultOfAllNonTouchingLoops;
+            allDeltasOfForwardPaths.add(deltaI);
+        }
+
+        return allDeltasOfForwardPaths;
+    }
+
+    private boolean isNonTouchingWithForwardPath(VerticesAndGain forwardPath, VerticesAndGain loop){
+
+        for(String vertex : forwardPath.getVertices()){
+            if(loop.getVertices().contains(vertex))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean isNonTouchingWithForwardPath(VerticesAndGain forwardPath, ArrayList<VerticesAndGain> nonTouchingCombination){
+        ArrayList<String> allVerticesInCombination = new ArrayList<>();
+        for(VerticesAndGain loop : nonTouchingCombination){
+            allVerticesInCombination.addAll(loop.getVertices());
+        }
+        for(String vertex : forwardPath.getVertices()){
+            if(allVerticesInCombination.contains(vertex))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean isNonTouchingLoops(ArrayList<VerticesAndGain> combination){
         for(int i=0; i<combination.size(); i++){
             for(int j=0; j<combination.get(i).getVertices().size(); j++){
                 String vertex = combination.get(i).getVertices().get(j);

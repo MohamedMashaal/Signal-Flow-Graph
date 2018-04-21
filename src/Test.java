@@ -26,8 +26,8 @@ public class Test {
 
         System.out.println("n non touching loops: " + sfg.getAllNonTouchingLoops());
 
-        System.out.println("delta: " + sfg.getDelta()
+        System.out.println("delta: " + sfg.getDelta());
 
-        );
+        System.out.println("all deltas for forward paths: " + sfg.getAllDeltasOfForwardPaths());
     }
 }
