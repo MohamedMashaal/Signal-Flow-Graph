@@ -25,5 +25,9 @@ public class Test {
         System.out.println("individual loops: " + sfg.getAllIndividualLoops());
 
         System.out.println("n non touching loops: " + sfg.getAllNonTouchingLoops());
+
+        System.out.println("delta: " + sfg.getDelta()
+
+        );
     }
 }

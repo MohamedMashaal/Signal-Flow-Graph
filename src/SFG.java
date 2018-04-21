@@ -16,6 +16,10 @@ public class SFG {
     private Graph<String, DefaultWeightedEdge> graph;
     private String inputNode;
     private String outputNode;
+    private ArrayList<VerticesAndGain> allForwardPaths;
+    private ArrayList<VerticesAndGain> allIndividualLoops;
+    private ArrayList<ArrayList<ArrayList<VerticesAndGain>>> allNonTouchingLoops;
+    private Double delta;
 
     public SFG(ArrayList<String> vertices, ArrayList<DirectedEdgeData> edges) {
         this.inputNode = vertices.get(0);
@@ -32,6 +36,10 @@ public class SFG {
     }
 
     public ArrayList<VerticesAndGain> getAllForwardPaths(){
+        if(allForwardPaths != null){
+            return allForwardPaths;
+        }
+
         if(graph == null)
             return null;
 
@@ -54,10 +62,15 @@ public class SFG {
             forwardPaths.add(new VerticesAndGain(vertices, gain));
         }
 
+        this.allForwardPaths = forwardPaths;
+
         return forwardPaths;
     }
 
     public ArrayList<VerticesAndGain> getAllIndividualLoops(){
+        if(allIndividualLoops != null){
+            return allIndividualLoops;
+        }
 
         ArrayList<VerticesAndGain> individualLoops = new ArrayList<>();
 
@@ -73,11 +86,17 @@ public class SFG {
             individualLoops.add(new VerticesAndGain(cycle, gain));
         }
 
+        this.allIndividualLoops = individualLoops;
+
         return individualLoops;
 
     }
 
     public ArrayList<ArrayList<ArrayList<VerticesAndGain>>> getAllNonTouchingLoops(){
+        if(allNonTouchingLoops != null){
+            return allNonTouchingLoops;
+        }
+
         ArrayList<VerticesAndGain> individualLoops = getAllIndividualLoops();
         ArrayList<ArrayList<ArrayList<VerticesAndGain>>> allNonTouchingLoops = new ArrayList<>();
         boolean stop = false;
@@ -99,7 +118,41 @@ public class SFG {
             allNonTouchingLoops.add(nNonTouchingLoops);
 
         }
+
+        this.allNonTouchingLoops = allNonTouchingLoops;
+
         return allNonTouchingLoops;
+    }
+
+    public double getDelta(){
+        if(delta != null){
+            return delta;
+        }
+
+        double sumOfIndividualLoopGains = 0;
+        for(VerticesAndGain loop : allIndividualLoops){
+            sumOfIndividualLoopGains += loop.getGain();
+        }
+
+        int sign = 1;
+        double resultOfAllNonTouchingLoops = 0;
+
+        for(ArrayList<ArrayList<VerticesAndGain>> nNonTouchingLoops : allNonTouchingLoops){
+            double sumOfGainProductsOfNNonTouchingLoops = 0;
+            for(ArrayList<VerticesAndGain> combination : nNonTouchingLoops){
+                double gainProductOfCombination = 1;
+                for(VerticesAndGain loop : combination){
+                    gainProductOfCombination *= loop.getGain();
+                }
+                sumOfGainProductsOfNNonTouchingLoops += gainProductOfCombination;
+            }
+            resultOfAllNonTouchingLoops += sign * sumOfGainProductsOfNNonTouchingLoops;
+            sign *= -1;
+        }
+
+        this.delta = 1 - sumOfIndividualLoopGains + resultOfAllNonTouchingLoops;
+
+        return this.delta;
     }
 
     private boolean isNonTouching(ArrayList<VerticesAndGain> combination){
