@@ -41,8 +41,4 @@ public class AlgoUtils {
         getAllCombinationsRecurse(index+1, arr, length);
     }
 
-    public static void main(String[] args){
-
-    }
-
 }

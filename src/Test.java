@@ -14,13 +14,11 @@ public class Test {
         v.add("y4");
         ArrayList<DirectedEdgeData> e = new ArrayList<>();
         e.add(new DirectedEdgeData("y1", "y2", 2));
-        //e.add(new DirectedEdgeData("y1", "y2", 3));
         e.add(new DirectedEdgeData("y1", "y3", 9));
         e.add(new DirectedEdgeData("y1", "y4", 8));
         e.add(new DirectedEdgeData("y2", "y3", 4));
         e.add(new DirectedEdgeData("y3", "y2", 5));
         e.add(new DirectedEdgeData("y3", "y4", 6));
-        //e.add(new DirectedEdgeData("y3", "y4", 7));
         e.add(new DirectedEdgeData("y4", "y1", 10));
 
         SFG sfg = new SFG(v, e);
@@ -38,7 +36,7 @@ public class Test {
         System.out.println("total transfer function: " + sfg.getTotalTransferFunction());
     }
 
-    public static void example2(){
+    public static void example2(){ // sheet #04 problem #03
         ArrayList<String> v = new ArrayList<>();
         v.add("y1");
         v.add("y2");
@@ -49,7 +47,6 @@ public class Test {
         v.add("y7");
         ArrayList<DirectedEdgeData> e = new ArrayList<>();
         e.add(new DirectedEdgeData("y1", "y2", 1));
-        //e.add(new DirectedEdgeData("y1", "y2", 3));
         e.add(new DirectedEdgeData("y2", "y3", 5));
         e.add(new DirectedEdgeData("y3", "y4", 10));
         e.add(new DirectedEdgeData("y4", "y5", 2));
