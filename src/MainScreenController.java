@@ -18,8 +18,10 @@ import java.util.ResourceBundle;
  */
 public class MainScreenController implements Initializable{
     Drawer drawer;
-    private static final Color canvasBackground = Color.WHITE;
+    private static final Color canvasBackground = Color.web("#ffffff");
 
+    @FXML
+    AnchorPane mainPane;
     @FXML
     AnchorPane canvas;
     @FXML
@@ -55,7 +57,7 @@ public class MainScreenController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        drawer = new Drawer(canvas);
+        drawer = new Drawer(canvas, canvasBackground);
         canvas.setBackground(new Background(new BackgroundFill(canvasBackground , CornerRadii.EMPTY, Insets.EMPTY)));
         addNodes.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -12,6 +12,7 @@ import java.awt.*;
  * Created by Mohamed Mashaal on 4/21/2018.
  */
 public class Vertex {
+    private static final Color textColor = Color.web("#3D3B35");
     private Circle circle;
     private Text label;
     private static final int strokeWidth = 2;
@@ -31,13 +32,12 @@ public class Vertex {
         circle.setStroke(color);
         circle.setStrokeWidth(strokeWidth);
         label = new Text(Integer.toString(number));
-        label.setFill(color);
+        label.setFill(textColor);
         label.setBoundsType(TextBoundsType.VISUAL);
         stackPane = new StackPane();
         stackPane.getChildren().addAll(circle , label);
         stackPane.setLayoutX(x - radius);
         stackPane.setLayoutY(y - radius);
-
     }
 
     public void addVertex(AnchorPane pane ){
