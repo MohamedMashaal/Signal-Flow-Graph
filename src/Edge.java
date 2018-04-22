@@ -10,8 +10,8 @@ import java.awt.*;
  * Created by Mohamed Mashaal on 4/21/2018.
  */
 public class Edge {
-    private static final Color curvesColor = Color.BLACK;
-    private static final Color weightColor = Color.RED;
+    private static final Color curvesColor = Color.web("#3D3B35");
+    private static final Color weightColor = Color.BLACK;
     private static final int strokeWidth = 2;
     private static final int selfLoopRadius = 13;
     private Color canvasBackground;
@@ -66,7 +66,7 @@ public class Edge {
         }
         else{
             if( up == 1){
-                endPoint = new Point ((int)curve.getEndX() ,(int) curve.getEndY() + 1);
+                endPoint = new Point ((int)curve.getEndX() +1 ,(int) curve.getEndY() + 1);
             }
             else{
                 endPoint = new Point ((int)curve.getStartX() ,(int) curve.getStartY() - 1);

@@ -8,10 +8,10 @@ import java.util.ArrayList;
  */
 public class Drawer {
     private static final int startPositionX = 30;
-    private static final int startPositionY = 273;
+    private static final int startPositionY = 350;
     private static final int nodesRadius = 20;
     private static final int distanceBetweenNodes = 120;
-    private static final Color drawingColor = Color.RED;
+    private static final Color drawingColor = Color.web("#fcc000");
     private ArrayList<Vertex> vertices;
     private ArrayList<Edge> edges;
     private AnchorPane canvas;

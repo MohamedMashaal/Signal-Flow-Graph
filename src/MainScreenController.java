@@ -18,8 +18,10 @@ import java.util.ResourceBundle;
  */
 public class MainScreenController implements Initializable{
     Drawer drawer;
-    private static final Color canvasBackground = Color.WHITE;
+    private static final Color canvasBackground = Color.web("#ffffff");
 
+    @FXML
+    AnchorPane mainPane;
     @FXML
     AnchorPane canvas;
     @FXML
