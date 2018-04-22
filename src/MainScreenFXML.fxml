@@ -27,7 +27,7 @@
       <TextArea fx:id="resultArea" layoutX="13.0" layoutY="572.0" prefHeight="203.0" prefWidth="1123.0" />
       <ScrollPane layoutX="216.0" layoutY="16.0" prefHeight="547.0" prefWidth="920.0">
          <content>
-            <AnchorPane fx:id="canvas" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="canvas" prefHeight="545.0" prefWidth="918.0" />
          </content>
       </ScrollPane>
       <TextField fx:id="edgeWeightInput" layoutX="15.0" layoutY="173.0" />
