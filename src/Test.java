@@ -7,6 +7,11 @@ public class Test {
         testCase1();
         testCase2();
         testCase3();
+        testCase4();
+        testCase5();
+        testCase6();
+        testCase7();
+        testCase8();
     }
 
     public static void example1(){
@@ -76,14 +81,11 @@ public class Test {
         System.out.println("total transfer function: " + sfg.getTotalTransferFunction());
     }
     
-    public static void testCase1(){ // sheet #04 problem #03
+    public static void testCase1(){
         ArrayList<String> v = new ArrayList<>();
-        v.add("0");
-        v.add("1");
-        v.add("2");
-        v.add("3");
-        v.add("4");
-        v.add("5");
+        for(int i=0; i<=5; i++){
+            v.add(String.valueOf(i));
+        }
         ArrayList<DirectedEdgeData> e = new ArrayList<>();
         e.add(new DirectedEdgeData("0", "1", 1));
         e.add(new DirectedEdgeData("1", "2", 1));
@@ -98,26 +100,19 @@ public class Test {
 
         SFG sfg = new SFG(v, e);
 
-        System.out.println("forward paths: " + sfg.getAllForwardPaths());
-
-        System.out.println("individual loops: " + sfg.getAllIndividualLoops());
-
-        System.out.println("n non touching loops: " + sfg.getAllNonTouchingLoops());
-
-        System.out.println("delta: " + sfg.getDelta());
-
-        System.out.println("all deltas for forward paths: " + sfg.getAllDeltasOfForwardPaths());
-
-        System.out.println("total transfer function: " + sfg.getTotalTransferFunction());
+        if(sfg.getTotalTransferFunction() == 1.25){
+            System.out.println("Test Case 1 : Succeeded");
+        }
+        else{
+            System.out.println("Test Case 1 : Failed");
+        }
     }
 
-    public static void testCase2(){ // sheet #04 problem #03
+    public static void testCase2(){
         ArrayList<String> v = new ArrayList<>();
-        v.add("0");
-        v.add("1");
-        v.add("2");
-        v.add("3");
-        v.add("4");
+        for(int i=0; i<=4; i++){
+            v.add(String.valueOf(i));
+        }
         ArrayList<DirectedEdgeData> e = new ArrayList<>();
         e.add(new DirectedEdgeData("0", "1", 1));
         e.add(new DirectedEdgeData("1", "2", 1));
@@ -129,27 +124,20 @@ public class Test {
 
         SFG sfg = new SFG(v, e);
 
-        System.out.println("forward paths: " + sfg.getAllForwardPaths());
+        if(sfg.getTotalTransferFunction() == 2.0/3){
+            System.out.println("Test Case 2 : Succeeded");
+        }
+        else{
+            System.out.println("Test Case 2 : Failed");
+        }
 
-        System.out.println("individual loops: " + sfg.getAllIndividualLoops());
-
-        System.out.println("n non touching loops: " + sfg.getAllNonTouchingLoops());
-
-        System.out.println("delta: " + sfg.getDelta());
-
-        System.out.println("all deltas for forward paths: " + sfg.getAllDeltasOfForwardPaths());
-
-        System.out.println("total transfer function: " + sfg.getTotalTransferFunction());
     }
 
-    public static void testCase3(){ // sheet #04 problem #03
+    public static void testCase3(){
         ArrayList<String> v = new ArrayList<>();
-        v.add("0");
-        v.add("1");
-        v.add("2");
-        v.add("3");
-        v.add("4");
-        v.add("5");
+        for(int i=0; i<=5; i++){
+            v.add(String.valueOf(i));
+        }
         ArrayList<DirectedEdgeData> e = new ArrayList<>();
         e.add(new DirectedEdgeData("0", "1", 1));
         e.add(new DirectedEdgeData("1", "2", 1));
@@ -163,16 +151,163 @@ public class Test {
 
         SFG sfg = new SFG(v, e);
 
-        System.out.println("forward paths: " + sfg.getAllForwardPaths());
+        if(sfg.getTotalTransferFunction() == 1.0/3){
+            System.out.println("Test Case 3 : Succeeded");
+        }
+        else{
+            System.out.println("Test Case 3 : Failed");
+        }
 
-        System.out.println("individual loops: " + sfg.getAllIndividualLoops());
-
-        System.out.println("n non touching loops: " + sfg.getAllNonTouchingLoops());
-
-        System.out.println("delta: " + sfg.getDelta());
-
-        System.out.println("all deltas for forward paths: " + sfg.getAllDeltasOfForwardPaths());
-
-        System.out.println("total transfer function: " + sfg.getTotalTransferFunction());
     }
+
+    public static void testCase4(){
+        ArrayList<String> v = new ArrayList<>();
+        for(int i=0; i<=6; i++){
+            v.add(String.valueOf(i));
+        }
+        ArrayList<DirectedEdgeData> e = new ArrayList<>();
+        e.add(new DirectedEdgeData("0", "1", 1));
+        e.add(new DirectedEdgeData("1", "2", 1));
+        e.add(new DirectedEdgeData("2", "3", 1));
+        e.add(new DirectedEdgeData("4", "5", 1));
+        e.add(new DirectedEdgeData("5", "6", 1));
+        e.add(new DirectedEdgeData("3", "2", -1));
+        e.add(new DirectedEdgeData("4", "4", -1));
+        e.add(new DirectedEdgeData("1", "4", 1));
+        e.add(new DirectedEdgeData("3", "5", 1));
+        e.add(new DirectedEdgeData("5", "3", -1));
+        e.add(new DirectedEdgeData("5", "1", -1));
+
+        SFG sfg = new SFG(v, e);
+
+        if(sfg.getTotalTransferFunction() == 0.4){
+            System.out.println("Test Case 4 : Succeeded");
+        }
+        else{
+            System.out.println("Test Case 4 : Failed");
+        }
+
+    }
+
+    public static void testCase5(){
+        ArrayList<String> v = new ArrayList<>();
+        for(int i=0; i<=8; i++){
+            v.add(String.valueOf(i));
+        }
+        ArrayList<DirectedEdgeData> e = new ArrayList<>();
+        e.add(new DirectedEdgeData("0", "1", 1));
+        e.add(new DirectedEdgeData("1", "2", 1));
+        e.add(new DirectedEdgeData("2", "3", 1));
+        e.add(new DirectedEdgeData("3", "4", 1));
+        e.add(new DirectedEdgeData("4", "5", 1));
+        e.add(new DirectedEdgeData("5", "6", 1));
+        e.add(new DirectedEdgeData("6", "7", 1));
+        e.add(new DirectedEdgeData("7", "8", 1));
+        e.add(new DirectedEdgeData("2", "7", 1));
+        e.add(new DirectedEdgeData("7", "1", -1));
+        e.add(new DirectedEdgeData("5", "2", -1));
+        e.add(new DirectedEdgeData("7", "4", -1));
+
+        SFG sfg = new SFG(v, e);
+
+        if(sfg.getTotalTransferFunction() == 0.5){
+            System.out.println("Test Case 5 : Succeeded");
+        }
+        else{
+            System.out.println("Test Case 5 : Failed");
+        }
+
+    }
+
+    public static void testCase6(){
+        ArrayList<String> v = new ArrayList<>();
+        for(int i=0; i<=8; i++){
+            v.add(String.valueOf(i));
+        }
+        ArrayList<DirectedEdgeData> e = new ArrayList<>();
+        e.add(new DirectedEdgeData("0", "1", 1));
+        e.add(new DirectedEdgeData("1", "2", 1));
+        e.add(new DirectedEdgeData("2", "3", 1));
+        e.add(new DirectedEdgeData("3", "4", 1));
+        e.add(new DirectedEdgeData("4", "5", 1));
+        e.add(new DirectedEdgeData("5", "6", 1));
+        e.add(new DirectedEdgeData("6", "7", 1));
+        e.add(new DirectedEdgeData("7", "8", 1));
+        e.add(new DirectedEdgeData("3", "6", 1));
+        e.add(new DirectedEdgeData("5", "7", 1));
+        e.add(new DirectedEdgeData("5", "4", -1));
+        e.add(new DirectedEdgeData("7", "5", -1));
+        e.add(new DirectedEdgeData("6", "2", -1));
+        e.add(new DirectedEdgeData("7", "1", -1));
+
+        SFG sfg = new SFG(v, e);
+
+        if(sfg.getTotalTransferFunction() == 1.0/3){
+            System.out.println("Test Case 6 : Succeeded");
+        }
+        else{
+            System.out.println("Test Case 6 : Failed");
+        }
+
+    }
+
+    public static void testCase7(){
+        ArrayList<String> v = new ArrayList<>();
+        for(int i=0; i<=7; i++){
+            v.add(String.valueOf(i));
+        }
+        ArrayList<DirectedEdgeData> e = new ArrayList<>();
+        e.add(new DirectedEdgeData("0", "1", 1));
+        e.add(new DirectedEdgeData("1", "2", 1));
+        e.add(new DirectedEdgeData("2", "3", 1));
+        e.add(new DirectedEdgeData("3", "4", 1));
+        e.add(new DirectedEdgeData("4", "5", 1));
+        e.add(new DirectedEdgeData("5", "6", 1));
+        e.add(new DirectedEdgeData("6", "7", 1));
+        e.add(new DirectedEdgeData("2", "1", -1));
+        e.add(new DirectedEdgeData("4", "3", -1));
+        e.add(new DirectedEdgeData("6", "5", -1));
+
+        SFG sfg = new SFG(v, e);
+
+        if(sfg.getTotalTransferFunction() == 0.125){
+            System.out.println("Test Case 7 : Succeeded");
+        }
+        else{
+            System.out.println("Test Case 7 : Failed");
+        }
+
+    }
+
+    public static void testCase8(){
+        ArrayList<String> v = new ArrayList<>();
+        for(int i=0; i<=9; i++){
+            v.add(String.valueOf(i));
+        }
+        ArrayList<DirectedEdgeData> e = new ArrayList<>();
+        e.add(new DirectedEdgeData("0", "1", 1));
+        e.add(new DirectedEdgeData("1", "2", 1));
+        e.add(new DirectedEdgeData("2", "3", 1));
+        e.add(new DirectedEdgeData("3", "4", 1));
+        e.add(new DirectedEdgeData("4", "5", 1));
+        e.add(new DirectedEdgeData("5", "6", 1));
+        e.add(new DirectedEdgeData("6", "7", 1));
+        e.add(new DirectedEdgeData("7", "8", 1));
+        e.add(new DirectedEdgeData("8", "9", 1));
+        e.add(new DirectedEdgeData("2", "1", -1));
+        e.add(new DirectedEdgeData("4", "3", -1));
+        e.add(new DirectedEdgeData("6", "5", -1));
+        e.add(new DirectedEdgeData("8", "7", -1));
+
+        SFG sfg = new SFG(v, e);
+
+        if(sfg.getTotalTransferFunction() == 0.0625){
+            System.out.println("Test Case 8 : Succeeded");
+        }
+        else{
+            System.out.println("Test Case 8 : Failed");
+        }
+
+    }
+
 }

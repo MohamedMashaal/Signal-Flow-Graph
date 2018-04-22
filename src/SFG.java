@@ -26,7 +26,7 @@ public class SFG {
             graph.addVertex(vertex);
         }
         for(DirectedEdgeData edgeData : edges){
-            System.out.println(edgeData.toString());
+            //System.out.println(edgeData.toString());
             DefaultWeightedEdge edge = graph.addEdge(edgeData.getFrom(), edgeData.getTo());
             graph.setEdgeWeight(edge, edgeData.getWeight());
         }
@@ -48,12 +48,12 @@ public class SFG {
         for(GraphPath<String, DefaultWeightedEdge> graphPath : graphPaths){
             double gain = 1;
             List<DefaultWeightedEdge> edgeList = graphPath.getEdgeList();
-            System.out.print(graphPath.getVertexList() + ": ");
+            //System.out.print(graphPath.getVertexList() + ": ");
             for(DefaultWeightedEdge edge : edgeList){
-                System.out.print(graph.getEdgeWeight(edge) + " ");
+                //System.out.print(graph.getEdgeWeight(edge) + " ");
                 gain *= graph.getEdgeWeight(edge);
             }
-            System.out.println();
+            //System.out.println();
             List<String> vertices = graphPath.getVertexList();
 
             forwardPaths.add(new VerticesAndGain(vertices, gain));
@@ -159,9 +159,9 @@ public class SFG {
 
         allDeltasOfForwardPaths = new ArrayList<>();
 
-        for(VerticesAndGain forwardPath : allForwardPaths){
+        for(VerticesAndGain forwardPath : getAllForwardPaths()){
             double sumOfIndividualLoopGains = 0;
-            for(VerticesAndGain loop : allIndividualLoops){
+            for(VerticesAndGain loop : getAllIndividualLoops()){
                 if(isNonTouchingWithForwardPath(forwardPath, loop)) {
                     sumOfIndividualLoopGains += loop.getGain();
                 }
@@ -170,7 +170,7 @@ public class SFG {
             int sign = 1;
             double resultOfAllNonTouchingLoops = 0;
 
-            for(ArrayList<ArrayList<VerticesAndGain>> nNonTouchingLoops : allNonTouchingLoops){
+            for(ArrayList<ArrayList<VerticesAndGain>> nNonTouchingLoops : getAllNonTouchingLoops()){
                 double sumOfGainProductsOfNNonTouchingLoops = 0;
                 for(ArrayList<VerticesAndGain> combination : nNonTouchingLoops){
                     if(isNonTouchingWithForwardPath(forwardPath, combination)) {
@@ -200,12 +200,12 @@ public class SFG {
         double sumOfProducts = 0;
         int i=0;
 
-        for(VerticesAndGain forwardPath : allForwardPaths){
-            sumOfProducts += forwardPath.getGain() * allDeltasOfForwardPaths.get(i);
+        for(VerticesAndGain forwardPath : getAllForwardPaths()){
+            sumOfProducts += forwardPath.getGain() * getAllDeltasOfForwardPaths().get(i);
             i++;
         }
 
-        totalTransferFunction = sumOfProducts / delta;
+        totalTransferFunction = sumOfProducts / getDelta();
 
         return totalTransferFunction;
     }
