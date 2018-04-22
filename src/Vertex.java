@@ -37,7 +37,6 @@ public class Vertex {
         stackPane.getChildren().addAll(circle , label);
         stackPane.setLayoutX(x - radius);
         stackPane.setLayoutY(y - radius);
-
     }
 
     public void addVertex(AnchorPane pane ){

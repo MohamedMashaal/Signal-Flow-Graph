@@ -15,12 +15,14 @@ public class Drawer {
     private ArrayList<Vertex> vertices;
     private ArrayList<Edge> edges;
     private AnchorPane canvas;
+    private Color canvasBackground;
     private int currentStoppingXPosition;
     private int currentStoppingYPosition;
     private int currentVertexNumber;
 
-    public Drawer(AnchorPane canvas){
+    public Drawer(AnchorPane canvas , Color canvasBackground){
         this.canvas = canvas;
+        this.canvasBackground = canvasBackground;
         vertices = new ArrayList<>();
         edges = new ArrayList<>();
         currentStoppingXPosition = startPositionX;
@@ -55,7 +57,7 @@ public class Drawer {
 
     public void addEdge(int from , int to , int weight){
         if(!edgeExist(from, to)){
-            Edge edge = new Edge(vertices.get(from-1), vertices.get(to-1), nodesRadius, weight);
+            Edge edge = new Edge(vertices.get(from-1), vertices.get(to-1), nodesRadius, weight, canvasBackground);
             edges.add(edge);
             edge.addEdge(canvas);
         }

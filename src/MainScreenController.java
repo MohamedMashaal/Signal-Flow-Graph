@@ -55,7 +55,7 @@ public class MainScreenController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        drawer = new Drawer(canvas);
+        drawer = new Drawer(canvas, canvasBackground);
         canvas.setBackground(new Background(new BackgroundFill(canvasBackground , CornerRadii.EMPTY, Insets.EMPTY)));
         addNodes.setOnAction(new EventHandler<ActionEvent>() {
             @Override
