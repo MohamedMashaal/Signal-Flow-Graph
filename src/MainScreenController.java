@@ -3,14 +3,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.PointLight;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
-import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -86,5 +84,66 @@ public class MainScreenController implements Initializable{
                 drawer.removeEdge(Integer.parseInt(fromNodeInput.getText()), Integer.parseInt(toNodeInput.getText()), Integer.parseInt(edgeWeightInput.getText()));
             }
         });
+
+        listForwardPaths.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
+                resultArea.setText(sfg.getAllForwardPaths().toString());
+            }
+        });
+
+        listIndLoops.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
+                resultArea.setText(sfg.getAllIndividualLoops().toString());
+            }
+        });
+
+        listNonTouchingLoops.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
+                resultArea.setText(sfg.getAllNonTouchingLoops().toString());
+            }
+        });
+
+        listDeltas.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
+                resultArea.setText(sfg.getDelta() + "\n" + sfg.getAllDeltasOfForwardPaths());
+            }
+        });
+
+        listTransferFunction.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
+                resultArea.setText(String.valueOf(sfg.getTotalTransferFunction()));
+            }
+        });
     }
+
+    private ArrayList<DirectedEdgeData> getConvertedEdges(){
+        ArrayList<DirectedEdgeData> edges = new ArrayList<>();
+        for(Edge edge : drawer.getEdges()){
+            edges.add(new DirectedEdgeData(Integer.toString(edge.getEdgePair().x),
+                    Integer.toString(edge.getEdgePair().y), edge.getWeight()));
+        }
+        System.out.println(edges);
+        return edges;
+    }
+
+    private ArrayList<String> getConvertedVertices(){
+        ArrayList<String> vertices = new ArrayList<>();
+        for(Vertex vertex : drawer.getVertices()){
+            vertices.add(Integer.toString(vertex.getNumber()));
+        }
+        System.out.println(vertices);
+        return vertices;
+    }
+
+
 }

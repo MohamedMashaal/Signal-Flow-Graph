@@ -92,5 +92,15 @@ public class Drawer {
         }
     }
 
+    public ArrayList<Vertex> getVertices() {
+        if(vertices == null)
+            return new ArrayList<>();
+        return vertices;
+    }
 
+    public ArrayList<Edge> getEdges() {
+        if(edges == null)
+            return new ArrayList<>();
+        return edges;
+    }
 }
