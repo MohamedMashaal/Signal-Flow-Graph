@@ -89,7 +89,28 @@ public class MainScreenController implements Initializable{
             @Override
             public void handle(ActionEvent event) {
                 SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
-                resultArea.setText(sfg.getAllForwardPaths().toString());
+
+                StringBuilder sb = new StringBuilder();
+                sb.append("All forward Paths\n---------------------------\n");
+                ArrayList<VerticesAndGain> forwardPaths = sfg.getAllForwardPaths();
+                int i=1;
+                for(VerticesAndGain forwardPath : forwardPaths){
+                    sb.append("Forward path #");
+                    if(i < 10)
+                        sb.append("0");
+                    sb.append(i);
+                    i++;
+                    sb.append("\n");
+
+                    sb.append("Vertices: ");
+                    sb.append(forwardPath.getVertices());
+                    sb.append("\n");
+                    sb.append("Gain: ");
+                    sb.append(forwardPath.getGain());
+                    sb.append("\n\n");
+                }
+
+                resultArea.setText(sb.toString());
             }
         });
 
@@ -97,7 +118,29 @@ public class MainScreenController implements Initializable{
             @Override
             public void handle(ActionEvent event) {
                 SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
-                resultArea.setText(sfg.getAllIndividualLoops().toString());
+
+                StringBuilder sb = new StringBuilder();
+                sb.append("All individual loops\n---------------------------\n");
+                ArrayList<VerticesAndGain> individualLoops = sfg.getAllIndividualLoops();
+                int i=1;
+                for(VerticesAndGain individualLoop : individualLoops){
+                    sb.append("Individual loop #");
+                    if(i < 10)
+                        sb.append("0");
+                    sb.append(i);
+                    i++;
+                    sb.append("\n");
+
+                    sb.append("Vertices: ");
+                    individualLoop.getVertices().add(individualLoop.getVertices().get(0));
+                    sb.append(individualLoop.getVertices());
+                    sb.append("\n");
+                    sb.append("Gain: ");
+                    sb.append(individualLoop.getGain());
+                    sb.append("\n\n");
+                }
+
+                resultArea.setText(sb.toString());
             }
         });
 
@@ -105,7 +148,37 @@ public class MainScreenController implements Initializable{
             @Override
             public void handle(ActionEvent event) {
                 SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
-                resultArea.setText(sfg.getAllNonTouchingLoops().toString());
+
+                StringBuilder sb = new StringBuilder();
+                ArrayList<ArrayList<ArrayList<VerticesAndGain>>> allNonTouchingLoops = sfg.getAllNonTouchingLoops();
+                int j=2;
+                for(ArrayList<ArrayList<VerticesAndGain>> allNonTouchingN : allNonTouchingLoops){
+                    sb.append("All " + j + " non touching loops\n---------------------------\n");
+                    j++;
+                    int k=1;
+                    for(ArrayList<VerticesAndGain> nonTouchingN : allNonTouchingN){
+                        sb.append("#");
+                        if(k < 10)
+                            sb.append("0");
+                        sb.append(k);
+                        sb.append("\n");
+                        k++;
+                        int i=1;
+                        for(VerticesAndGain loop : nonTouchingN){
+                            sb.append("Vertices: ");
+                            ArrayList<String> vertices = new ArrayList<>();
+                            vertices.addAll(loop.getVertices());
+                            vertices.add(vertices.get(0));
+                            sb.append(vertices);
+                            sb.append(" Gain: ");
+                            sb.append(loop.getGain());
+                            sb.append("\n");
+                        }
+                        sb.append("\n\n");
+                    }
+                }
+
+                resultArea.setText(sb.toString());
             }
         });
 
@@ -113,7 +186,25 @@ public class MainScreenController implements Initializable{
             @Override
             public void handle(ActionEvent event) {
                 SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
-                resultArea.setText(sfg.getDelta() + "\n" + sfg.getAllDeltasOfForwardPaths());
+
+                StringBuilder sb = new StringBuilder();
+                sb.append("Delta = ");
+                sb.append(sfg.getDelta());
+                sb.append("\n\n");
+                ArrayList<Double> allDeltasOfForwardPaths = sfg.getAllDeltasOfForwardPaths();
+                int i=1;
+                for(Double deltaI : allDeltasOfForwardPaths){
+                    sb.append("Delta #");
+                    if(i < 10)
+                        sb.append("0");
+                    sb.append(i);
+                    i++;
+                    sb.append(" = ");
+                    sb.append(deltaI);
+                    sb.append("\n");
+                }
+
+                resultArea.setText(sb.toString());
             }
         });
 
@@ -121,7 +212,13 @@ public class MainScreenController implements Initializable{
             @Override
             public void handle(ActionEvent event) {
                 SFG sfg = new SFG(getConvertedVertices(), getConvertedEdges());
-                resultArea.setText(String.valueOf(sfg.getTotalTransferFunction()));
+
+                StringBuilder sb = new StringBuilder();
+                sb.append("T.F = ");
+                sb.append(sfg.getTotalTransferFunction());
+                sb.append("\n");
+
+                resultArea.setText(sb.toString());
             }
         });
     }
