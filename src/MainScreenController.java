@@ -83,7 +83,7 @@ public class MainScreenController implements Initializable{
         removeEdge.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                drawer.removeEdge(Integer.parseInt(fromNodeInput.getText()), Integer.parseInt(toNodeInput.getText()), Integer.parseInt(edgeWeightInput.getText()));
+                drawer.removeEdge(Integer.parseInt(fromNodeInput.getText()), Integer.parseInt(toNodeInput.getText()));
             }
         });
     }

@@ -45,6 +45,7 @@ public class Drawer {
             if(!(vertices.size() <= 0)){
                 Vertex lastOne = vertices.get(vertices.size()-1);
                 vertices.remove(vertices.size()-1);
+                removeRelatedEdges(lastOne);
                 lastOne.removeVertex(canvas);
                 currentStoppingXPosition -= distanceBetweenNodes;
                 currentVertexNumber --;
@@ -84,7 +85,7 @@ public class Drawer {
     }
 
 
-    public void removeEdge(int from , int to , int weight){
+    public void removeEdge(int from , int to){
         if(edgeExist(from, to)){
             Edge edge = getEdge(from, to);
             edges.remove(edge);
@@ -92,5 +93,16 @@ public class Drawer {
         }
     }
 
-
+    private void removeRelatedEdges(Vertex vertex){
+        ArrayList<Edge> toBeDeleted = new ArrayList<>();
+        for(Edge edge :edges){
+            if(edge.getEdgePair().x == vertex.getNumber() || edge.getEdgePair().y == vertex.getNumber()){
+                toBeDeleted.add(edge);
+            }
+        }
+        for(Edge edge : toBeDeleted){
+            edge.removeEdge(canvas);
+            edges.remove(edge);
+        }
+    }
 }
