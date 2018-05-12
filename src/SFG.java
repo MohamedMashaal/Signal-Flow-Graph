@@ -21,6 +21,7 @@ public class SFG {
     public SFG(ArrayList<String> vertices, ArrayList<DirectedEdgeData> edges) {
         this.inputNode = vertices.get(0);
         this.outputNode = vertices.get(vertices.size()-1);
+        System.out.println(inputNode + " " + outputNode);
         this.graph = new DirectedWeightedPseudograph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
         for(String vertex : vertices){
             graph.addVertex(vertex);
@@ -34,6 +35,7 @@ public class SFG {
 
     public ArrayList<VerticesAndGain> getAllForwardPaths(){
         if(allForwardPaths != null){
+            System.out.println("not null");
             return allForwardPaths;
         }
 
@@ -127,14 +129,14 @@ public class SFG {
         }
 
         double sumOfIndividualLoopGains = 0;
-        for(VerticesAndGain loop : allIndividualLoops){
+        for(VerticesAndGain loop : getAllIndividualLoops()){
             sumOfIndividualLoopGains += loop.getGain();
         }
 
         int sign = 1;
         double resultOfAllNonTouchingLoops = 0;
 
-        for(ArrayList<ArrayList<VerticesAndGain>> nNonTouchingLoops : allNonTouchingLoops){
+        for(ArrayList<ArrayList<VerticesAndGain>> nNonTouchingLoops : getAllNonTouchingLoops()){
             double sumOfGainProductsOfNNonTouchingLoops = 0;
             for(ArrayList<VerticesAndGain> combination : nNonTouchingLoops){
                 double gainProductOfCombination = 1;

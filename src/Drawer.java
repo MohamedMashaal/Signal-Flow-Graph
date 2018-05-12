@@ -93,16 +93,28 @@ public class Drawer {
         }
     }
 
-    private void removeRelatedEdges(Vertex vertex){
+    private void removeRelatedEdges(Vertex vertex) {
         ArrayList<Edge> toBeDeleted = new ArrayList<>();
-        for(Edge edge :edges){
-            if(edge.getEdgePair().x == vertex.getNumber() || edge.getEdgePair().y == vertex.getNumber()){
+        for (Edge edge : edges) {
+            if (edge.getEdgePair().x == vertex.getNumber() || edge.getEdgePair().y == vertex.getNumber()) {
                 toBeDeleted.add(edge);
             }
         }
-        for(Edge edge : toBeDeleted){
+        for (Edge edge : toBeDeleted) {
             edge.removeEdge(canvas);
             edges.remove(edge);
         }
+    }
+
+    public ArrayList<Vertex> getVertices() {
+        if(vertices == null)
+            return new ArrayList<>();
+        return vertices;
+    }
+
+    public ArrayList<Edge> getEdges() {
+        if(edges == null)
+            return new ArrayList<>();
+        return edges;
     }
 }

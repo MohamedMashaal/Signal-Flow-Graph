@@ -20,7 +20,7 @@ public class MainScreen extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MainScreenFXML.fxml"));
 
-        primaryStage.setTitle("SFG");
+        primaryStage.setTitle("Signal Flow Graph");
         primaryStage.setScene(new Scene(root, 1146, 767));
         primaryStage.show();
     }
